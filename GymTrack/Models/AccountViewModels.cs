@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+/* Does this show the name of Jaret the Great?*/
 namespace GymTrack.Models
 {
     public class ExternalLoginConfirmationViewModel
