@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 /* adding a comment*/
+// rich adding a comment
 namespace GymTrack.Models
 {
     public class ExternalLoginConfirmationViewModel
