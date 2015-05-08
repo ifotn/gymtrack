@@ -1,0 +1,58 @@
+﻿@model GymTrack.Models.Results
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Results</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ExerciseID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExerciseID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExerciseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExerciseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SetNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SetNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reps)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reps)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
