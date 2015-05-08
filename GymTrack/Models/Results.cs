@@ -8,6 +8,7 @@ namespace GymTrack.Models
     public class Results
     {
         public int ID { get; set; }
+        public int ExerciseDayProgramID { get; set; }
         public int ExerciseID { get; set; }
         public DateTime ExerciseDate { get; set; }
         public int SetNumber { get; set; }

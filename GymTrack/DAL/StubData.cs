@@ -22,16 +22,27 @@ namespace GymTrack.DAL
             };
 
             exercises.ForEach(ex => context.Exercises.Add(ex));
-            context.SaveChanges();    
+            context.SaveChanges();               
             
+            var exerciseDay = new List<ExerciseDayProgram>
+            {
+                new ExerciseDayProgram{ExerciseDayName="Day 32", ExerciseID = 1, PlannedSets=3, PlannedReps=10},
+                new ExerciseDayProgram{ExerciseDayName="Day 32", ExerciseID = 2, PlannedSets=3, PlannedReps=10},
+                new ExerciseDayProgram{ExerciseDayName="Day 32", ExerciseID = 3, PlannedSets=3, PlannedReps=10},
+                new ExerciseDayProgram{ExerciseDayName="Day 32", ExerciseID = 4, PlannedSets=3, PlannedReps=10}
+            };
+            exercises.ForEach(ex => context.Exercises.Add(ex));
+            context.SaveChanges();               
+
+
             var results = new List<Results>
             {
-                new Results{ExerciseID=1, SetNumber=1, ExerciseDate=DateTime.Now, Weight=70, Reps=10},
-                new Results{ExerciseID=1, SetNumber=2, ExerciseDate=DateTime.Now, Weight=70, Reps=8},
-                new Results{ExerciseID=1, SetNumber=3, ExerciseDate=DateTime.Now, Weight=70, Reps=6},
-                new Results{ExerciseID=2, SetNumber=1, ExerciseDate=DateTime.Now, Weight=60, Reps=10},
-                new Results{ExerciseID=2, SetNumber=2, ExerciseDate=DateTime.Now, Weight=60, Reps=10},
-                new Results{ExerciseID=2, SetNumber=3, ExerciseDate=DateTime.Now, Weight=60, Reps=10}
+                new Results{ExerciseDayProgramID=1, ExerciseID=1, SetNumber=1, ExerciseDate=DateTime.Now, Weight=70, Reps=10},
+                new Results{ExerciseDayProgramID=1, ExerciseID=1, SetNumber=2, ExerciseDate=DateTime.Now, Weight=70, Reps=8},
+                new Results{ExerciseDayProgramID=1, ExerciseID=1, SetNumber=3, ExerciseDate=DateTime.Now, Weight=70, Reps=6},
+                new Results{ExerciseDayProgramID=1, ExerciseID=2, SetNumber=1, ExerciseDate=DateTime.Now, Weight=60, Reps=10},
+                new Results{ExerciseDayProgramID=1, ExerciseID=2, SetNumber=2, ExerciseDate=DateTime.Now, Weight=60, Reps=10},
+                new Results{ExerciseDayProgramID=1, ExerciseID=2, SetNumber=3, ExerciseDate=DateTime.Now, Weight=60, Reps=10}
             };
             results.ForEach(r => context.Results.Add(r));
             context.SaveChanges();

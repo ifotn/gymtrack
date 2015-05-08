@@ -17,5 +17,6 @@ namespace GymTrack.DAL
 
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<Results> Results { get; set; }
+        public DbSet<ExerciseDayProgram> ExerciseDayProgram { get; set; }
     }
 }

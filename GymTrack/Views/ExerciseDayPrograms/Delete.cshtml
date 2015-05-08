@@ -1,0 +1,56 @@
+﻿@model GymTrack.Models.ExerciseDayProgram
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ExerciseDayProgram</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ExerciseDayName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExerciseDayName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExerciseID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExerciseID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlannedSets)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlannedSets)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlannedReps)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlannedReps)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
