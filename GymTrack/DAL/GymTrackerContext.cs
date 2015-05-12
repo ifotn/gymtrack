@@ -12,11 +12,15 @@ namespace GymTrack.DAL
     {
         public GymTrackerContext() : base ("GymTrackerContext")
         {
-
         }
 
         public DbSet<Exercise> Exercises { get; set; }
-        public DbSet<Results> Results { get; set; }
         public DbSet<ExerciseDayProgram> ExerciseDayProgram { get; set; }
+        public DbSet<Results> Results { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        }
     }
 }

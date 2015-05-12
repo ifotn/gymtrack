@@ -11,7 +11,7 @@ using GymTrack.Models;
 
 namespace GymTrack.Controllers
 {
-    public class ExercisesController : Controller
+    public class ExerciseController : Controller
     {
         private GymTrackerContext db = new GymTrackerContext();
 

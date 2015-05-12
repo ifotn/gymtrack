@@ -5,15 +5,14 @@ namespace GymTrack.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<GymTrack.DAL.GymTrackerContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<GymTrack.Models.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "GymTrack.DAL.GymTrackerContext";
         }
 
-        protected override void Seed(GymTrack.DAL.GymTrackerContext context)
+        protected override void Seed(GymTrack.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
