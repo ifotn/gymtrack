@@ -39,7 +39,6 @@ namespace GymTrack.Controllers
         // GET: ExerciseDayPrograms/Create
         public ActionResult Create()
         {
-            PopulateExerciseDropDownList();
             return View();
         }
 
@@ -125,13 +124,5 @@ namespace GymTrack.Controllers
             }
             base.Dispose(disposing);
         }
-
-        private void PopulateExerciseDropDownList(object selectedExercise = null)
-        {
-            var exerciseQuery = from e in db.Exercises
-                                   orderby e.ExerciseName
-                                   select e;
-            ViewBag.ExerciseID = new SelectList(exerciseQuery, "ExerciseID", "ExerciseName", selectedExercise);
-        } 
     }
 }

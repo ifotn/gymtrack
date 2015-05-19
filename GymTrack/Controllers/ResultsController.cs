@@ -18,7 +18,8 @@ namespace GymTrack.Controllers
         // GET: Results
         public ActionResult Index()
         {
-            return View(db.Results.ToList());
+            var results = db.Results.Include(r => r.Exercise).Include(r => r.ExerciseDayProgram);
+            return View(results.ToList());
         }
 
         // GET: Results/Details/5
@@ -39,6 +40,8 @@ namespace GymTrack.Controllers
         // GET: Results/Create
         public ActionResult Create()
         {
+            ViewBag.ExerciseID = new SelectList(db.Exercises, "ID", "ExerciseName");
+            ViewBag.ExerciseDayProgramID = new SelectList(db.ExerciseDayProgram, "ID", "ExerciseDayName");
             return View();
         }
 
@@ -47,7 +50,7 @@ namespace GymTrack.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ExerciseID,ExerciseDate,SetNumber,Weight,Reps")] Results results)
+        public ActionResult Create([Bind(Include = "ID,ExerciseID,ExerciseDayProgramID,ExerciseDate,SetNumber,Weight,Reps")] Results results)
         {
             if (ModelState.IsValid)
             {
@@ -56,6 +59,8 @@ namespace GymTrack.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ExerciseID = new SelectList(db.Exercises, "ID", "ExerciseName", results.ExerciseID);
+            ViewBag.ExerciseDayProgramID = new SelectList(db.ExerciseDayProgram, "ID", "ExerciseDayName", results.ExerciseDayProgramID);
             return View(results);
         }
 
@@ -71,6 +76,8 @@ namespace GymTrack.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ExerciseID = new SelectList(db.Exercises, "ID", "ExerciseName", results.ExerciseID);
+            ViewBag.ExerciseDayProgramID = new SelectList(db.ExerciseDayProgram, "ID", "ExerciseDayName", results.ExerciseDayProgramID);
             return View(results);
         }
 
@@ -79,7 +86,7 @@ namespace GymTrack.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ExerciseID,ExerciseDate,SetNumber,Weight,Reps")] Results results)
+        public ActionResult Edit([Bind(Include = "ID,ExerciseID,ExerciseDayProgramID,ExerciseDate,SetNumber,Weight,Reps")] Results results)
         {
             if (ModelState.IsValid)
             {
@@ -87,6 +94,8 @@ namespace GymTrack.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.ExerciseID = new SelectList(db.Exercises, "ID", "ExerciseName", results.ExerciseID);
+            ViewBag.ExerciseDayProgramID = new SelectList(db.ExerciseDayProgram, "ID", "ExerciseDayName", results.ExerciseDayProgramID);
             return View(results);
         }
 

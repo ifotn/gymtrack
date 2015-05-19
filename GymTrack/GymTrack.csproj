@@ -163,8 +163,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ExerciseController.cs" />
     <Compile Include="Controllers\ExerciseDayProgramsController.cs" />
+    <Compile Include="Controllers\ExercisesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
@@ -257,21 +257,21 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Exercise\Create.cshtml" />
-    <Content Include="Views\Exercise\Delete.cshtml" />
-    <Content Include="Views\Exercise\Details.cshtml" />
-    <Content Include="Views\Exercise\Edit.cshtml" />
-    <Content Include="Views\Exercise\Index.cshtml" />
-    <Content Include="Views\Results\Create.cshtml" />
-    <Content Include="Views\Results\Delete.cshtml" />
-    <Content Include="Views\Results\Details.cshtml" />
-    <Content Include="Views\Results\Edit.cshtml" />
-    <Content Include="Views\Results\Index.cshtml" />
+    <Content Include="Views\Exercises\Create.cshtml" />
+    <Content Include="Views\Exercises\Delete.cshtml" />
+    <Content Include="Views\Exercises\Details.cshtml" />
+    <Content Include="Views\Exercises\Edit.cshtml" />
+    <Content Include="Views\Exercises\Index.cshtml" />
     <Content Include="Views\ExerciseDayPrograms\Create.cshtml" />
     <Content Include="Views\ExerciseDayPrograms\Delete.cshtml" />
     <Content Include="Views\ExerciseDayPrograms\Details.cshtml" />
     <Content Include="Views\ExerciseDayPrograms\Edit.cshtml" />
     <Content Include="Views\ExerciseDayPrograms\Index.cshtml" />
+    <Content Include="Views\Results\Create.cshtml" />
+    <Content Include="Views\Results\Delete.cshtml" />
+    <Content Include="Views\Results\Details.cshtml" />
+    <Content Include="Views\Results\Edit.cshtml" />
+    <Content Include="Views\Results\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

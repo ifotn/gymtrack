@@ -12,11 +12,19 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ExerciseID)
+            @Html.DisplayNameFor(model => model.Exercise.ExerciseName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ExerciseID)
+            @Html.DisplayFor(model => model.Exercise.ExerciseName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExerciseDayProgram.ExerciseDayName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExerciseDayProgram.ExerciseDayName)
         </dd>
 
         <dt>
