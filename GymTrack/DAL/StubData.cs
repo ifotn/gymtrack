@@ -31,7 +31,7 @@ namespace GymTrack.DAL
                 new ExerciseDayProgram{ExerciseDayName="Day 32", ExerciseID = 3, PlannedSets=3, PlannedReps=10},
                 new ExerciseDayProgram{ExerciseDayName="Day 32", ExerciseID = 4, PlannedSets=3, PlannedReps=10}
             };
-            exerciseDay.ForEach(e => context.ExerciseDayProgram.Add(e));
+            exerciseDay.ForEach(e => context.ExerciseDayPrograms.Add(e));
             context.SaveChanges();               
 
 

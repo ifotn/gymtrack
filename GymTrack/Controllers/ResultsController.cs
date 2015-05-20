@@ -41,7 +41,7 @@ namespace GymTrack.Controllers
         public ActionResult Create()
         {
             ViewBag.ExerciseID = new SelectList(db.Exercises, "ID", "ExerciseName");
-            ViewBag.ExerciseDayProgramID = new SelectList(db.ExerciseDayProgram, "ID", "ExerciseDayName");
+            ViewBag.ExerciseDayProgramID = new SelectList(db.ExerciseDayPrograms, "ID", "ExerciseDayName");
             return View();
         }
 
@@ -60,7 +60,7 @@ namespace GymTrack.Controllers
             }
 
             ViewBag.ExerciseID = new SelectList(db.Exercises, "ID", "ExerciseName", results.ExerciseID);
-            ViewBag.ExerciseDayProgramID = new SelectList(db.ExerciseDayProgram, "ID", "ExerciseDayName", results.ExerciseDayProgramID);
+            ViewBag.ExerciseDayProgramID = new SelectList(db.ExerciseDayPrograms, "ID", "ExerciseDayName", results.ExerciseDayProgramID);
             return View(results);
         }
 
@@ -77,7 +77,7 @@ namespace GymTrack.Controllers
                 return HttpNotFound();
             }
             ViewBag.ExerciseID = new SelectList(db.Exercises, "ID", "ExerciseName", results.ExerciseID);
-            ViewBag.ExerciseDayProgramID = new SelectList(db.ExerciseDayProgram, "ID", "ExerciseDayName", results.ExerciseDayProgramID);
+            ViewBag.ExerciseDayProgramID = new SelectList(db.ExerciseDayPrograms, "ID", "ExerciseDayName", results.ExerciseDayProgramID);
             return View(results);
         }
 
@@ -95,7 +95,7 @@ namespace GymTrack.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ExerciseID = new SelectList(db.Exercises, "ID", "ExerciseName", results.ExerciseID);
-            ViewBag.ExerciseDayProgramID = new SelectList(db.ExerciseDayProgram, "ID", "ExerciseDayName", results.ExerciseDayProgramID);
+            ViewBag.ExerciseDayProgramID = new SelectList(db.ExerciseDayPrograms, "ID", "ExerciseDayName", results.ExerciseDayProgramID);
             return View(results);
         }
 

@@ -10,17 +10,24 @@ namespace GymTrack.DAL
 {
     public class GymTrackerContext : DbContext 
     {
+        /* JW Comment this section removed when adding the model builder for the ExerciseExerciseDayProgram model builder
         public GymTrackerContext() : base ("GymTrackerContext")
         {
-        }
+        }*/
 
         public DbSet<Exercise> Exercises { get; set; }
-        public DbSet<ExerciseDayProgram> ExerciseDayProgram { get; set; }
+        public DbSet<ExerciseDayProgram> ExerciseDayPrograms { get; set; }
         public DbSet<Results> Results { get; set; }
-
+                           
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            modelBuilder.Entity<Exercise>()
+             .HasMany(e => e.ExerciseDayPrograms).WithMany(i => i.Exercises)
+             .Map(t => t.MapLeftKey("ExerciseID")
+                 .MapRightKey("ExerciseDayProgramID")
+                 .ToTable("ExerciseExerciseDayProgram"));
         }
     }
 }
