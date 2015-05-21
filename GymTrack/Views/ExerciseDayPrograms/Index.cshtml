@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<GymTrack.Models.ExerciseDayProgram>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ExerciseDayProgram";
 }
 
-<h2>Index</h2>
+<h2>Daily Exercise Programs</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,40 +12,23 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Exercise.ExerciseName)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.ExerciseDayName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PlannedSets)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PlannedReps)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Exercise.ExerciseName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExerciseDayName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PlannedSets)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PlannedReps)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var group in Model.GroupBy(item => item.ExerciseDayName))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => group.Key)
+            </td>
+            <td>
+                @Html.ActionLink("Select", "Index", new { id = group.Key})
+            </td>
+        </tr>
+        
+    }
 
 </table>
+

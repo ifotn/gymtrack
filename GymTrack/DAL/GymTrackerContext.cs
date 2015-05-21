@@ -23,12 +23,12 @@ namespace GymTrack.DAL
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-            /* JW Comment - removed this and made the relationship between Exercise and ExerciseDayProgram 1:many
+            
             modelBuilder.Entity<Exercise>()
              .HasMany(e => e.ExerciseDayPrograms).WithMany(i => i.Exercises)
              .Map(t => t.MapLeftKey("ExerciseID")
                  .MapRightKey("ExerciseDayProgramID")
-                 .ToTable("ExerciseExerciseDayProgram"));*/
+                 .ToTable("ExerciseExerciseDayProgram"));
         }
     }
 }

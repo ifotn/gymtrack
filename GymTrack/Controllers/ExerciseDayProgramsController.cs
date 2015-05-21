@@ -18,8 +18,7 @@ namespace GymTrack.Controllers
         // GET: ExerciseDayPrograms
         public ActionResult Index()
         {
-            var exerciseDayPrograms = db.ExerciseDayPrograms.Include(e => e.Exercise);
-            return View(exerciseDayPrograms.ToList());
+            return View(db.ExerciseDayPrograms.ToList());
         }
 
         // GET: ExerciseDayPrograms/Details/5
@@ -40,7 +39,6 @@ namespace GymTrack.Controllers
         // GET: ExerciseDayPrograms/Create
         public ActionResult Create()
         {
-            ViewBag.ExerciseID = new SelectList(db.Exercises, "ID", "ExerciseName");
             return View();
         }
 
@@ -58,7 +56,6 @@ namespace GymTrack.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ExerciseID = new SelectList(db.Exercises, "ID", "ExerciseName", exerciseDayProgram.ExerciseID);
             return View(exerciseDayProgram);
         }
 
@@ -74,7 +71,6 @@ namespace GymTrack.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ExerciseID = new SelectList(db.Exercises, "ID", "ExerciseName", exerciseDayProgram.ExerciseID);
             return View(exerciseDayProgram);
         }
 
@@ -91,7 +87,6 @@ namespace GymTrack.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ExerciseID = new SelectList(db.Exercises, "ID", "ExerciseName", exerciseDayProgram.ExerciseID);
             return View(exerciseDayProgram);
         }
 

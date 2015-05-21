@@ -13,7 +13,7 @@ namespace GymTrack.Models
         public int PlannedSets { get; set; }
         public int PlannedReps { get; set; }
 
-        public virtual Exercise Exercise { get; set; }
+        public virtual ICollection<Exercise> Exercises { get; set; }
         public virtual ICollection<Results> Results { get; set; }
     }
 }
