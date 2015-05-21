@@ -41,7 +41,14 @@ namespace GymTrack.Controllers
         // GET: ExerciseDayPrograms/Create
         public ActionResult Create()
         {
-            return View();
+            var query = from e in db.Exercises
+                        orderby e.ExerciseName
+                        select e;
+
+            SelectList sl = new SelectList(query, "ExerciseID", "ExerciseName", null);
+            ViewBag.ExerciseListID = new SelectList(query, "ExerciseID", "ExerciseName", null);
+
+            return View(sl);
         }
 
         // POST: ExerciseDayPrograms/Create
