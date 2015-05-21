@@ -9,12 +9,8 @@ namespace GymTrack.Models
     {
         public int ID { get; set; }
         public string ExerciseDayName { get; set; }
-        public int ExerciseID { get; set; }
-        public int PlannedSets { get; set; }
-        public int PlannedReps { get; set; }
+        public string Description { get; set; }
 
-        public Exercise Exercise { get; set; }
-       
-        public virtual ICollection<Results> Results { get; set; }
+        public virtual ICollection<PlannedRepsAndSets> PlannedExercises { get; set; }
     }
 }

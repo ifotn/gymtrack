@@ -18,7 +18,7 @@ namespace GymTrack.Controllers
         // GET: ExerciseDayPrograms
         public ActionResult Index()
         {
-            return View(db.ExerciseDayProgram.ToList());
+            return View(db.ExerciseDayPrograms.ToList());
         }
 
         // GET: ExerciseDayPrograms/Details/5
@@ -28,7 +28,7 @@ namespace GymTrack.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ExerciseDayProgram exerciseDayProgram = db.ExerciseDayProgram.Find(id);
+            ExerciseDayProgram exerciseDayProgram = db.ExerciseDayPrograms.Find(id);
             if (exerciseDayProgram == null)
             {
                 return HttpNotFound();
@@ -54,11 +54,11 @@ namespace GymTrack.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ExerciseDayName,ExerciseID,PlannedSets,PlannedReps")] ExerciseDayProgram exerciseDayProgram)
+        public ActionResult Create([Bind(Include = "ID,ExerciseDayName,Description")] ExerciseDayProgram exerciseDayProgram)
         {
             if (ModelState.IsValid)
             {
-                db.ExerciseDayProgram.Add(exerciseDayProgram);
+                db.ExerciseDayPrograms.Add(exerciseDayProgram);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -73,7 +73,7 @@ namespace GymTrack.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ExerciseDayProgram exerciseDayProgram = db.ExerciseDayProgram.Find(id);
+            ExerciseDayProgram exerciseDayProgram = db.ExerciseDayPrograms.Find(id);
             if (exerciseDayProgram == null)
             {
                 return HttpNotFound();
@@ -86,7 +86,7 @@ namespace GymTrack.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ExerciseDayName,ExerciseID,PlannedSets,PlannedReps")] ExerciseDayProgram exerciseDayProgram)
+        public ActionResult Edit([Bind(Include = "ID,ExerciseDayName,Description")] ExerciseDayProgram exerciseDayProgram)
         {
             if (ModelState.IsValid)
             {
@@ -104,7 +104,7 @@ namespace GymTrack.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ExerciseDayProgram exerciseDayProgram = db.ExerciseDayProgram.Find(id);
+            ExerciseDayProgram exerciseDayProgram = db.ExerciseDayPrograms.Find(id);
             if (exerciseDayProgram == null)
             {
                 return HttpNotFound();
@@ -117,8 +117,8 @@ namespace GymTrack.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ExerciseDayProgram exerciseDayProgram = db.ExerciseDayProgram.Find(id);
-            db.ExerciseDayProgram.Remove(exerciseDayProgram);
+            ExerciseDayProgram exerciseDayProgram = db.ExerciseDayPrograms.Find(id);
+            db.ExerciseDayPrograms.Remove(exerciseDayProgram);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

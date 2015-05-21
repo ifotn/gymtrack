@@ -26,14 +26,21 @@ namespace GymTrack.DAL
             
             var exerciseDay = new List<ExerciseDayProgram>
             {
-                new ExerciseDayProgram{ExerciseDayName="Day 32", ExerciseID = 1, PlannedSets=3, PlannedReps=10},
-                new ExerciseDayProgram{ExerciseDayName="Day 32", ExerciseID = 2, PlannedSets=3, PlannedReps=10},
-                new ExerciseDayProgram{ExerciseDayName="Day 32", ExerciseID = 3, PlannedSets=3, PlannedReps=10},
-                new ExerciseDayProgram{ExerciseDayName="Day 32", ExerciseID = 4, PlannedSets=3, PlannedReps=10}
+                new ExerciseDayProgram{ExerciseDayName="Day 32", Description="Workout B-Light"},
+                new ExerciseDayProgram{ExerciseDayName="Day 33", Description="Active Rest" }
             };
-            exerciseDay.ForEach(e => context.ExerciseDayProgram.Add(e));
-            context.SaveChanges();               
+            exerciseDay.ForEach(e => context.ExerciseDayPrograms.Add(e));
+            context.SaveChanges();
 
+            var plannedRepsAndSets = new List<PlannedRepsAndSets>
+            {
+                new PlannedRepsAndSets{ExerciseID = 1, ExerciseDayProgramID=1, PlannedSets=3, PlannedReps=10},
+                new PlannedRepsAndSets{ExerciseID = 2, ExerciseDayProgramID=1, PlannedSets=3, PlannedReps=10},
+                new PlannedRepsAndSets{ExerciseID = 3, ExerciseDayProgramID=1, PlannedSets=3, PlannedReps=10},
+                new PlannedRepsAndSets{ExerciseID = 4, ExerciseDayProgramID=2, PlannedSets=3, PlannedReps=10}
+            };
+            plannedRepsAndSets.ForEach(e => context.PlannedRepsAndSets.Add(e));
+            context.SaveChanges();
 
             var results = new List<Results>
             {

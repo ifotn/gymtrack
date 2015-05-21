@@ -1,4 +1,4 @@
-﻿@model GymTrack.Models.Results
+﻿@model GymTrack.Models.PlannedRepsAndSets
 
 @{
     ViewBag.Title = "Details";
@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Results</h4>
+    <h4>PlannedRepsAndSets</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -27,35 +27,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ExerciseDate)
+            @Html.DisplayNameFor(model => model.PlannedSets)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ExerciseDate)
+            @Html.DisplayFor(model => model.PlannedSets)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SetNumber)
+            @Html.DisplayNameFor(model => model.PlannedReps)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SetNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Weight)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Weight)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Reps)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Reps)
+            @Html.DisplayFor(model => model.PlannedReps)
         </dd>
 
     </dl>
