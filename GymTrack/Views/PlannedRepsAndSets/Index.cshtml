@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GymTrack.Models.Results>
+﻿@model IEnumerable<GymTrack.Models.PlannedRepsAndSets>
 
 @{
     ViewBag.Title = "Index";
@@ -18,16 +18,10 @@
             @Html.DisplayNameFor(model => model.ExerciseDayProgram.ExerciseDayName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ExerciseDate)
+            @Html.DisplayNameFor(model => model.PlannedSets)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SetNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Weight)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Reps)
+            @Html.DisplayNameFor(model => model.PlannedReps)
         </th>
         <th></th>
     </tr>
@@ -41,16 +35,10 @@
             @Html.DisplayFor(modelItem => item.ExerciseDayProgram.ExerciseDayName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ExerciseDate)
+            @Html.DisplayFor(modelItem => item.PlannedSets)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SetNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Weight)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Reps)
+            @Html.DisplayFor(modelItem => item.PlannedReps)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

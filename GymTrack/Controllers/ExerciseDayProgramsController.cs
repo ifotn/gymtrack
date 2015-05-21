@@ -8,30 +8,17 @@ using System.Web;
 using System.Web.Mvc;
 using GymTrack.DAL;
 using GymTrack.Models;
-using GymTrack.ViewModels;
 
 namespace GymTrack.Controllers
 {
     public class ExerciseDayProgramsController : Controller
     {
         private GymTrackerContext db = new GymTrackerContext();
-         
+
         // GET: ExerciseDayPrograms
-        public ActionResult Index(int? id)
+        public ActionResult Index()
         {
-            var viewModel = new ExerciseDayProgramIndexData();
-            viewModel.ExerciseDayPrograms = db.ExerciseDayPrograms
-                .Include(i => i.Exercises)
-                .OrderBy(i => i.ExerciseDayName);
-
-            if (id != null)
-            {
-                ViewBag.ExerciseDayProgram = id.Value;
-                viewModel.Exercises = viewModel.ExerciseDayPrograms.Where(
-                    i => i.ID == id.Value).Single().Exercises;
-            }
-
-            return View(viewModel);
+            return View(db.ExerciseDayPrograms.ToList());
         }
 
         // GET: ExerciseDayPrograms/Details/5
@@ -41,13 +28,11 @@ namespace GymTrack.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
             ExerciseDayProgram exerciseDayProgram = db.ExerciseDayPrograms.Find(id);
             if (exerciseDayProgram == null)
             {
                 return HttpNotFound();
             }
-
             return View(exerciseDayProgram);
         }
 
@@ -62,7 +47,7 @@ namespace GymTrack.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ExerciseDayName,ExerciseID,PlannedSets,PlannedReps")] ExerciseDayProgram exerciseDayProgram)
+        public ActionResult Create([Bind(Include = "ID,ExerciseDayName,Description")] ExerciseDayProgram exerciseDayProgram)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +79,7 @@ namespace GymTrack.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ExerciseDayName,ExerciseID,PlannedSets,PlannedReps")] ExerciseDayProgram exerciseDayProgram)
+        public ActionResult Edit([Bind(Include = "ID,ExerciseDayName,Description")] ExerciseDayProgram exerciseDayProgram)
         {
             if (ModelState.IsValid)
             {

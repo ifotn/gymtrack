@@ -1,11 +1,10 @@
-﻿@model GymTrack.ViewModels.ExerciseDayProgramIndexData
-
+﻿@model IEnumerable<GymTrack.Models.ExerciseDayProgram>
 
 @{
-    ViewBag.Title = "ExerciseDayPrograms";
+    ViewBag.Title = "Index";
 }
 
-<h2>Daily Exercise Programs</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,33 +12,28 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ExerciseDayPrograms)
+            @Html.DisplayNameFor(model => model.ExerciseDayName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
         </th>
         <th></th>
     </tr>
 
-@foreach (var group in Model.ExerciseDayPrograms.GroupBy(ep => ep.ExerciseDayName))
-    {      
-            string selectedRow = "";
-            if (group.Key == ViewBag.ExerciseDayName)
-            {
-                selectedRow = "success";
-            }
-            <tr class="@selectedRow">                
-                <td>
-                    @Html.DisplayFor(modelItem => group.Key)
-                </td>
-                <td>
-                    @Html.ActionLink("Select", "Index", new { id = group.Key })
-                </td>
-            </tr>
-     }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExerciseDayName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
 
 </table>
-
-
-
-
-
-
-

@@ -1,0 +1,50 @@
+﻿@model GymTrack.Models.PlannedRepsAndSets
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PlannedRepsAndSets</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Exercise.ExerciseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Exercise.ExerciseName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExerciseDayProgram.ExerciseDayName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExerciseDayProgram.ExerciseDayName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlannedSets)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlannedSets)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlannedReps)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlannedReps)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

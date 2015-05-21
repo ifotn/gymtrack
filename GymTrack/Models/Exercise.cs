@@ -12,7 +12,6 @@ namespace GymTrack.Models
         public string Description { get; set; }
         public string VideoURL { get; set; }
 
-        public virtual ICollection<ExerciseDayProgram> ExerciseDayPrograms { get; set; }
-        public virtual ICollection<Results> Results { get; set; }
+        public virtual ICollection<PlannedRepsAndSets> PlannedExercises { get; set; }
     }
 }

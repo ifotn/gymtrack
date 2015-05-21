@@ -167,6 +167,7 @@
     <Compile Include="Controllers\ExercisesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PlannedRepsAndSetsController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="DAL\GymTrackerContext.cs" />
     <Compile Include="DAL\StubData.cs" />
@@ -188,6 +189,7 @@
     <Compile Include="Models\ExerciseDayProgram.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PlannedRepsAndSets.cs" />
     <Compile Include="Models\Results.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -263,16 +265,21 @@
     <Content Include="Views\Exercises\Details.cshtml" />
     <Content Include="Views\Exercises\Edit.cshtml" />
     <Content Include="Views\Exercises\Index.cshtml" />
-    <Content Include="Views\Results\Create.cshtml" />
-    <Content Include="Views\Results\Delete.cshtml" />
-    <Content Include="Views\Results\Details.cshtml" />
-    <Content Include="Views\Results\Edit.cshtml" />
-    <Content Include="Views\Results\Index.cshtml" />
     <Content Include="Views\ExerciseDayPrograms\Create.cshtml" />
     <Content Include="Views\ExerciseDayPrograms\Delete.cshtml" />
     <Content Include="Views\ExerciseDayPrograms\Details.cshtml" />
     <Content Include="Views\ExerciseDayPrograms\Edit.cshtml" />
     <Content Include="Views\ExerciseDayPrograms\Index.cshtml" />
+    <Content Include="Views\Results\Create.cshtml" />
+    <Content Include="Views\Results\Delete.cshtml" />
+    <Content Include="Views\Results\Details.cshtml" />
+    <Content Include="Views\Results\Edit.cshtml" />
+    <Content Include="Views\Results\Index.cshtml" />
+    <Content Include="Views\PlannedRepsAndSets\Create.cshtml" />
+    <Content Include="Views\PlannedRepsAndSets\Delete.cshtml" />
+    <Content Include="Views\PlannedRepsAndSets\Details.cshtml" />
+    <Content Include="Views\PlannedRepsAndSets\Edit.cshtml" />
+    <Content Include="Views\PlannedRepsAndSets\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
