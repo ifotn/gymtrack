@@ -15,7 +15,7 @@ namespace GymTrack.Controllers
     public class ExerciseDayProgramsController : Controller
     {
         private GymTrackerContext db = new GymTrackerContext();
-
+         
         // GET: ExerciseDayPrograms
         public ActionResult Index(int? id)
         {
