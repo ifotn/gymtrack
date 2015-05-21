@@ -12,18 +12,12 @@
 <table class="table">
     <tr>
         <th>
-            Rich is one nutty guy.
+            Rich is one nutty guy. 
             Seriously - GIT is making him nuts.
             @Html.DisplayNameFor(model => model.ExerciseDayName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ExerciseID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PlannedSets)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PlannedReps)
+            @Html.DisplayNameFor(model => model.Description)
         </th>
         <th></th>
     </tr>
@@ -34,13 +28,7 @@
             @Html.DisplayFor(modelItem => item.ExerciseDayName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ExerciseID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PlannedSets)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PlannedReps)
+            @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
