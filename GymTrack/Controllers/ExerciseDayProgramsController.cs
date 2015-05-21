@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using GymTrack.DAL;
 using GymTrack.Models;
+using GymTrack.ViewModels;
 
 namespace GymTrack.Controllers
 {
