@@ -19,7 +19,7 @@ namespace GymTrack.Controllers
         // GET: ExerciseDayPrograms
         public ActionResult Index()
         {
-            /* ha ha can you see this change?*/
+            /* ha ha can you see this change?*/ 
             return View(db.ExerciseDayPrograms.ToList());
         }
 
