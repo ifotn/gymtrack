@@ -11,5 +11,6 @@ namespace GymTrack.ViewModels
         public IEnumerable<ExerciseDayProgram> ExerciseDayPrograms { get; set; }
         public IEnumerable<Exercise> Exercises { get; set; }
         public IEnumerable<PlannedRepsAndSets> PlannedRepsAndSets { get; set; }
+        public IEnumerable<Results> Results { get; set; }
     }
 }
