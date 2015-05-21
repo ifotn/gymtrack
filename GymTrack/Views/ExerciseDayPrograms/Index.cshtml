@@ -1,41 +1,66 @@
-﻿@model IEnumerable<GymTrack.Models.ExerciseDayProgram>
+﻿@model GymTrack.ViewModels.ExerciseDayProgramIndexData
 
 @{
-    ViewBag.Title = "ExerciseDayProgram";
+    ViewBag.Title = "ExerciseDayPrograms";
 }
 
-<h2>Index</h2>
+<h2>Exercise Routines</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
-        <th>
-            Rich is one nutty guy. 
-            Seriously - GIT is making him nuts.
-            @Html.DisplayNameFor(model => model.ExerciseDayName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
+        <th>Workout Routine</th>
+        <th>Description</th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExerciseDayName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.ExerciseDayPrograms)
+    {
+        string selectedRow = "";
+        if (item.ID == ViewBag.ExerciseDayProgramID)
+        {
+            selectedRow = "success";
+        }
+        
+        <tr class="@selectedRow">
+            <td>
+                @Html.DisplayFor(modelItem => item.ExerciseDayName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Select", "Index", new { id = item.ID }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
+
+@if (Model.PlannedRepsAndSets != null)
+{
+    <h3>Exercises for the routine selected above</h3>
+    <table class="table">
+        <tr>
+            <th>Exercise</th>
+            <th>Planned Reps</th>
+            <th>Planned Sets</th>
+        </tr>
+
+        @foreach (var item in Model.PlannedRepsAndSets)
+        {        
+            <tr>
+                <td>@item.Exercise.ExerciseName</td>
+                <td>@item.PlannedSets</td>
+                <td>@item.PlannedReps</td>
+            </tr>
+        }
+
+    </table>
+
+}

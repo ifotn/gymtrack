@@ -17,11 +17,22 @@ namespace GymTrack.Controllers
         private GymTrackerContext db = new GymTrackerContext();
 
         // GET: ExerciseDayPrograms
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            /* ha ha can you see this change?*/ 
-            return View(db.ExerciseDayPrograms.ToList());
+            var viewModel = new ExerciseDayProgramIndexData();
+            viewModel.ExerciseDayPrograms = db.ExerciseDayPrograms.Include( p => p.PlannedExercises.Select(e => e.Exercise))
+                .OrderBy(p => p.ExerciseDayName);
+
+            if (id != null)
+            {
+                ViewBag.ExerciseDayProgramID = id.Value;
+                viewModel.PlannedRepsAndSets = viewModel.ExerciseDayPrograms.Where(
+                    i => i.ID == id.Value).Single().PlannedExercises;
+            }
+
+            return View(viewModel);
         }
+
 
         // GET: ExerciseDayPrograms/Details/5
         public ActionResult Details(int? id)
@@ -41,14 +52,7 @@ namespace GymTrack.Controllers
         // GET: ExerciseDayPrograms/Create
         public ActionResult Create()
         {
-            var query = from e in db.Exercises
-                        orderby e.ExerciseName
-                        select e;
-
-            SelectList sl = new SelectList(query, "ExerciseID", "ExerciseName", null);
-            ViewBag.ExerciseListID = new SelectList(query, "ExerciseID", "ExerciseName", null);
-
-            return View(sl);
+            return View();
         }
 
         // POST: ExerciseDayPrograms/Create
