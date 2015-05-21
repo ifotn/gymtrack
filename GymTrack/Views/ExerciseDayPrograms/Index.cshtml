@@ -1,7 +1,8 @@
-﻿@model IEnumerable<GymTrack.Models.ExerciseDayProgram>
+﻿@model GymTrack.ViewModels.ExerciseDayProgramIndexData
+
 
 @{
-    ViewBag.Title = "ExerciseDayProgram";
+    ViewBag.Title = "ExerciseDayPrograms";
 }
 
 <h2>Daily Exercise Programs</h2>
@@ -12,23 +13,33 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ExerciseDayName)
+            @Html.DisplayNameFor(model => model.ExerciseDayPrograms)
         </th>
         <th></th>
     </tr>
 
-    @foreach (var group in Model.GroupBy(item => item.ExerciseDayName))
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => group.Key)
-            </td>
-            <td>
-                @Html.ActionLink("Select", "Index", new { id = group.Key})
-            </td>
-        </tr>
-        
-    }
+@foreach (var group in Model.ExerciseDayPrograms.GroupBy(ep => ep.ExerciseDayName))
+    {      
+            string selectedRow = "";
+            if (group.Key == ViewBag.ExerciseDayName)
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">                
+                <td>
+                    @Html.DisplayFor(modelItem => group.Key)
+                </td>
+                <td>
+                    @Html.ActionLink("Select", "Index", new { id = group.Key })
+                </td>
+            </tr>
+     }
 
 </table>
+
+
+
+
+
+
 

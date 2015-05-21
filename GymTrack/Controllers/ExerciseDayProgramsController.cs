@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using GymTrack.DAL;
 using GymTrack.Models;
+using GymTrack.ViewModels;
 
 namespace GymTrack.Controllers
 {
@@ -16,9 +17,21 @@ namespace GymTrack.Controllers
         private GymTrackerContext db = new GymTrackerContext();
 
         // GET: ExerciseDayPrograms
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            return View(db.ExerciseDayPrograms.ToList());
+            var viewModel = new ExerciseDayProgramIndexData();
+            viewModel.ExerciseDayPrograms = db.ExerciseDayPrograms
+                .Include(i => i.Exercises)
+                .OrderBy(i => i.ExerciseDayName);
+
+            if (id != null)
+            {
+                ViewBag.ExerciseDayProgram = id.Value;
+                viewModel.Exercises = viewModel.ExerciseDayPrograms.Where(
+                    i => i.ID == id.Value).Single().Exercises;
+            }
+
+            return View(viewModel);
         }
 
         // GET: ExerciseDayPrograms/Details/5
@@ -28,11 +41,13 @@ namespace GymTrack.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             ExerciseDayProgram exerciseDayProgram = db.ExerciseDayPrograms.Find(id);
             if (exerciseDayProgram == null)
             {
                 return HttpNotFound();
             }
+
             return View(exerciseDayProgram);
         }
 
