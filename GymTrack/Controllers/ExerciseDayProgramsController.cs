@@ -34,24 +34,13 @@ namespace GymTrack.Controllers
         }
 
 
-        // GET: ExerciseDayPrograms/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ExerciseDayProgram exerciseDayProgram = db.ExerciseDayPrograms.Find(id);
-            if (exerciseDayProgram == null)
-            {
-                return HttpNotFound();
-            }
-            return View(exerciseDayProgram);
-        }
-
+   
         // GET: ExerciseDayPrograms/Create
         public ActionResult Create()
         {
+            var newExerciseProgram = new ExerciseDayProgram();
+            newExerciseProgram.PlannedExercises = new List<PlannedRepsAndSets>();
+            PopulateExercises(newExerciseProgram);
             return View();
         }
 
@@ -60,8 +49,18 @@ namespace GymTrack.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ExerciseDayName,Description")] ExerciseDayProgram exerciseDayProgram)
+        public ActionResult Create([Bind(Include = "ID,ExerciseDayName,Description")] ExerciseDayProgram exerciseDayProgram, string[] selectedExercises)
         {
+            if (selectedExercises != null)
+            {
+                exerciseDayProgram.PlannedExercises = new List<PlannedRepsAndSets>();
+                foreach (var exercise in selectedExercises)
+                {
+                    var exerciseToAdd = db.PlannedRepsAndSets.Find(int.Parse(exercise));
+                    exerciseDayProgram.PlannedExercises.Add(exerciseToAdd);
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 db.ExerciseDayPrograms.Add(exerciseDayProgram);
@@ -69,6 +68,7 @@ namespace GymTrack.Controllers
                 return RedirectToAction("Index");
             }
 
+            PopulateExercises(exerciseDayProgram);
             return View(exerciseDayProgram);
         }
 
@@ -85,6 +85,7 @@ namespace GymTrack.Controllers
                 return HttpNotFound();
             }
             return View(exerciseDayProgram);
+
         }
 
         // POST: ExerciseDayPrograms/Edit/5
@@ -128,6 +129,26 @@ namespace GymTrack.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        private void PopulateExercises(ExerciseDayProgram exerciseProgram)
+        {
+            var allExercises = db.Exercises;
+            var selectedExercises = new HashSet<int>(exerciseProgram.PlannedExercises.Select(e => e.ExerciseID));
+            var viewModel = new List<AssignedExercises>();
+
+            foreach (var exercise in allExercises)
+            {
+                viewModel.Add(new AssignedExercises
+                {
+                    ExerciseID = exercise.ID,
+                    ExerciseName = exercise.ExerciseName,
+                    Assigned = selectedExercises.Contains(exercise.ID)
+                });
+            }
+
+            ViewBag.Exercises = viewModel;
+        }
+
 
         protected override void Dispose(bool disposing)
         {

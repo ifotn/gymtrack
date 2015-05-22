@@ -193,6 +193,7 @@
     <Compile Include="Models\Results.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AssignedExercises.cs" />
     <Compile Include="ViewModels\ExerciseDayProgramIndexData.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -277,7 +278,6 @@
     <Content Include="Views\PlannedRepsAndSets\Index.cshtml" />
     <Content Include="Views\ExerciseDayPrograms\Create.cshtml" />
     <Content Include="Views\ExerciseDayPrograms\Delete.cshtml" />
-    <Content Include="Views\ExerciseDayPrograms\Details.cshtml" />
     <Content Include="Views\ExerciseDayPrograms\Edit.cshtml" />
     <Content Include="Views\ExerciseDayPrograms\Index.cshtml" />
   </ItemGroup>
