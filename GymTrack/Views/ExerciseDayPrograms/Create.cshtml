@@ -7,10 +7,10 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>ExerciseDayProgram</h4>
         <hr />
@@ -31,46 +31,19 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <h4>Select the exercises for the program</h4>
-                <table>
-                    <tr>
-                        @{
-    
-    List<GymTrack.ViewModels.AssignedExercises> exercises = ViewBag.Exercises;
+    </div>
 
-    foreach (var exercise in exercises)
-    {
-        @:</tr><tr>
-        
-        @:<td>
-            <input type="checkbox"
-                   name="selectedExercises"
-                   value="@exercise.ExerciseID"
-                   @(Html.Raw(exercise.Assigned ? "checked=\"checked\"" : "")) />
-            @exercise.ExerciseID @:  @exercise.ExerciseName
-        @:</td>
-        }
-        @:
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" name ="action:Create"       value="Create" class="btn btn-default" />
+            <input type="submit" name ="action:CreateAndAdd"  value="Create and add exercises" class="btn btn-default" />
 
-        }
-    </tr>
-                    </table>
-                </div>
-            </div>
-
-
-
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
         </div>
     </div>
+
 }
+
+
 
 <div>
     @Html.ActionLink("Back to List", "Index")

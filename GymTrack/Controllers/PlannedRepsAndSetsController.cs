@@ -18,7 +18,7 @@ namespace GymTrack.Controllers
         // GET: PlannedRepsAndSets
         public ActionResult Index()
         {
-            var plannedRepsAndSets = db.PlannedRepsAndSets.Include(p => p.Exercise).Include(p => p.ExerciseDayProgram);
+            var plannedRepsAndSets = db.PlannedRepsAndSets.Include(p => p.Exercise).Include(p => p.ExerciseDayPrograms);
             return View(plannedRepsAndSets.ToList());
         }
 
@@ -37,11 +37,12 @@ namespace GymTrack.Controllers
             return View(plannedRepsAndSets);
         }
 
+
         // GET: PlannedRepsAndSets/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            ViewBag.ExerciseID = new SelectList(db.Exercises, "ID", "ExerciseName");
-            ViewBag.ExerciseDayProgramID = new SelectList(db.ExerciseDayPrograms, "ID", "ExerciseDayName");
+            ViewBag.ExerciseDayProgramID = new SelectList(db.ExerciseDayPrograms, "ID", "ExerciseDayName", id);
+            ViewBag.ExerciseID = new SelectList(db.Exercises, "ID", "ExerciseName",1);            
             return View();
         }
 

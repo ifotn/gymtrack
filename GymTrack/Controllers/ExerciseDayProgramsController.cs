@@ -23,12 +23,13 @@ namespace GymTrack.Controllers
             viewModel.ExerciseDayPrograms = db.ExerciseDayPrograms.Include( p => p.PlannedExercises.Select(e => e.Exercise))
                 .OrderBy(p => p.ExerciseDayName);
 
+            
             if (id != null)
             {
                 ViewBag.ExerciseDayProgramID = id.Value;
                 viewModel.PlannedRepsAndSets = viewModel.ExerciseDayPrograms.Where(
                     i => i.ID == id.Value).Single().PlannedExercises;
-            }
+            } 
 
             return View(viewModel);
         }
@@ -40,7 +41,7 @@ namespace GymTrack.Controllers
         {
             var newExerciseProgram = new ExerciseDayProgram();
             newExerciseProgram.PlannedExercises = new List<PlannedRepsAndSets>();
-            PopulateExercises(newExerciseProgram);
+            /*PopulateExercises(newExerciseProgram);   */
             return View();
         }
 
@@ -49,26 +50,24 @@ namespace GymTrack.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ExerciseDayName,Description")] ExerciseDayProgram exerciseDayProgram, string[] selectedExercises)
-        {
-            if (selectedExercises != null)
-            {
-                exerciseDayProgram.PlannedExercises = new List<PlannedRepsAndSets>();
-                foreach (var exercise in selectedExercises)
-                {
-                    var exerciseToAdd = db.PlannedRepsAndSets.Find(int.Parse(exercise));
-                    exerciseDayProgram.PlannedExercises.Add(exerciseToAdd);
-                }
-            }
-
+        public ActionResult Create([Bind(Include = "ID,ExerciseDayName,Description")] ExerciseDayProgram exerciseDayProgram, string input)
+        {           
             if (ModelState.IsValid)
             {
                 db.ExerciseDayPrograms.Add(exerciseDayProgram);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+               
+               if (input == "Create and add exercises")
+                {
+                    return RedirectToAction("Create/" + exerciseDayProgram.ID, "PlannedRepsAndSets");
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+                return RedirectToAction("Create/" + exerciseDayProgram.ID, "PlannedRepsAndSets");
             }
-
-            PopulateExercises(exerciseDayProgram);
+            
             return View(exerciseDayProgram);
         }
 

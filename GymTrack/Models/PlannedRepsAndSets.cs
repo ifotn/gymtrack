@@ -15,7 +15,7 @@ namespace GymTrack.Models
 
         /*Navigation information*/
         public virtual Exercise Exercise { get; set; }
-        public virtual ExerciseDayProgram ExerciseDayProgram { get; set; }
+        public virtual ExerciseDayProgram ExerciseDayPrograms { get; set; }
         public virtual ICollection<Results> Results { get; set; }
     }
 }
