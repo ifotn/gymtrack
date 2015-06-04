@@ -44,12 +44,12 @@ namespace GymTrack.DAL
 
             var results = new List<Results>
             {
-                new Results{ExerciseDayProgramID=1, ExerciseID=1, SetNumber=1, ExerciseDate=DateTime.Now, Weight=70, Reps=10},
-                new Results{ExerciseDayProgramID=1, ExerciseID=1, SetNumber=2, ExerciseDate=DateTime.Now, Weight=70, Reps=8},
-                new Results{ExerciseDayProgramID=1, ExerciseID=1, SetNumber=3, ExerciseDate=DateTime.Now, Weight=70, Reps=6},
-                new Results{ExerciseDayProgramID=1, ExerciseID=2, SetNumber=1, ExerciseDate=DateTime.Now, Weight=60, Reps=10},
-                new Results{ExerciseDayProgramID=1, ExerciseID=2, SetNumber=2, ExerciseDate=DateTime.Now, Weight=60, Reps=10},
-                new Results{ExerciseDayProgramID=1, ExerciseID=2, SetNumber=3, ExerciseDate=DateTime.Now, Weight=60, Reps=10}
+                new Results{ExerciseDayProgramID=1, ExerciseID=1, SetNumber=1, ExerciseDate=DateTime.Now, Weight=70, Reps=10, GuID="608f616d-b393-4672-9f7b-cb0313b69d0f"},
+                new Results{ExerciseDayProgramID=1, ExerciseID=1, SetNumber=2, ExerciseDate=DateTime.Now, Weight=70, Reps=8,  GuID="608f616d-b393-4672-9f7b-cb0313b69d0f"},
+                new Results{ExerciseDayProgramID=1, ExerciseID=1, SetNumber=3, ExerciseDate=DateTime.Now, Weight=70, Reps=6,  GuID="608f616d-b393-4672-9f7b-cb0313b69d0f"},
+                new Results{ExerciseDayProgramID=1, ExerciseID=2, SetNumber=1, ExerciseDate=DateTime.Now, Weight=60, Reps=10, GuID="b95689d1-57d3-4cf4-9da8-fb4ae62749c9"},
+                new Results{ExerciseDayProgramID=1, ExerciseID=2, SetNumber=2, ExerciseDate=DateTime.Now, Weight=60, Reps=10, GuID="b95689d1-57d3-4cf4-9da8-fb4ae62749c9"},
+                new Results{ExerciseDayProgramID=1, ExerciseID=2, SetNumber=3, ExerciseDate=DateTime.Now, Weight=60, Reps=10, GuID="b95689d1-57d3-4cf4-9da8-fb4ae62749c9"}
             };
             results.ForEach(r => context.Results.Add(r));
             context.SaveChanges();

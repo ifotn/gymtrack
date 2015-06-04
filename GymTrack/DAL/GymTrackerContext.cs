@@ -10,10 +10,10 @@ namespace GymTrack.DAL
 {
     public class GymTrackerContext : DbContext 
     {
-        /* JW Comment this section removed when adding the model builder for the ExerciseExerciseDayProgram model builder
-        public GymTrackerContext() : base ("GymTrackerContext")
+
+        public GymTrackerContext() : base ("DefaultConnection")
         {
-        }*/
+        }
 
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<PlannedRepsAndSets> PlannedRepsAndSets { get; set; }
