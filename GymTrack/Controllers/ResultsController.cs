@@ -9,6 +9,11 @@ using System.Web.Mvc;
 using GymTrack.DAL;
 using GymTrack.Models;
 
+// These are used to access the specific user
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
+
 namespace GymTrack.Controllers
 {
     public class ResultsController : Controller
@@ -16,9 +21,33 @@ namespace GymTrack.Controllers
         private GymTrackerContext db = new GymTrackerContext();
 
         // GET: Results
-        public ActionResult Index()
+        public ActionResult Index(string exerciseDaySearchName)
         {
-            var results = db.Results.Include(r => r.Exercise).Include(r => r.ExerciseDayProgram);
+
+            ViewBag.CurrentFilter = exerciseDaySearchName;
+
+            var results = from e in db.Results
+                               select e;
+
+            var GuID = "*";
+
+            if (User.Identity.IsAuthenticated)
+            {
+                GuID = User.Identity.GetUserId();
+            }
+
+
+            if (String.IsNullOrEmpty(exerciseDaySearchName))
+            {
+                results = db.Results.Include(r => r.Exercise).Include(r => r.ExerciseDayProgram).Where(r => r.GuID == GuID);
+            }
+            else
+            {
+                results = db.Results.Include(r => r.Exercise).Include(r => r.ExerciseDayProgram).Where(r => r.GuID == GuID).Where(r => r.ExerciseDayProgram.ExerciseDayName == exerciseDaySearchName);
+            }
+
+         
+            
             return View(results.ToList());
         }
 
@@ -54,6 +83,8 @@ namespace GymTrack.Controllers
         {
             if (ModelState.IsValid)
             {
+                var GuID = User.Identity.GetUserId();
+                results.GuID = GuID;
                 db.Results.Add(results);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -90,6 +121,8 @@ namespace GymTrack.Controllers
         {
             if (ModelState.IsValid)
             {
+                var GuID = User.Identity.GetUserId();
+                results.GuID = GuID;
                 db.Entry(results).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

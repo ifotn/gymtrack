@@ -1,14 +1,23 @@
 ﻿@model IEnumerable<GymTrack.Models.Results>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Results";
 }
 
-<h2>Index</h2>
+<h2>Your logged results are listed below</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm("Index", "Results", FormMethod.Get))
+{
+    <p>
+        Find by Exercise Day Name: @Html.TextBox("exerciseDaySearchName", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
