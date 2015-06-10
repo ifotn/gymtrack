@@ -21,11 +21,35 @@ namespace GymTrack.Controllers
         private GymTrackerContext db = new GymTrackerContext();
 
         // GET: Results
-        public ActionResult Index(string exerciseDaySearchName)
+        public ActionResult Index(string exerciseDaySearchName, string exerciseName)
         {
 
-            ViewBag.CurrentFilter = exerciseDaySearchName;
+            // Create a selectList for the view with the different workout program names
+            var exerciseDays = new List<string>();
 
+            var edQuery = from ed in db.ExerciseDayPrograms
+                          orderby ed.ExerciseDayName
+                          select ed.ExerciseDayName;
+            
+            exerciseDays.AddRange(edQuery.Distinct());
+           
+            ViewBag.exerciseDaySearchName = new SelectList(exerciseDays);
+
+
+            // Create a selectList for the various exercises
+            var activities = new List<string>();
+
+            var exerciseQuery = from eqResults in db.Results
+                                join ex in db.Exercises on eqResults.ExerciseID equals ex.ID
+                                orderby ex.ExerciseName
+                                select ex.ExerciseName;
+                               
+            activities.AddRange(exerciseQuery.Distinct());
+
+            ViewBag.exerciseName = new SelectList(activities);
+
+
+            // Generate results 
             var results = from e in db.Results
                                select e;
 
@@ -37,15 +61,29 @@ namespace GymTrack.Controllers
             }
 
 
-            if (String.IsNullOrEmpty(exerciseDaySearchName))
+            results = db.Results.Include(r => r.Exercise).Include(r => r.ExerciseDayProgram).Where(r => r.GuID == GuID);
+
+            
+            // If there is a filter for the exerciseName filter the results
+            if (!String.IsNullOrEmpty(exerciseName))
             {
-                results = db.Results.Include(r => r.Exercise).Include(r => r.ExerciseDayProgram).Where(r => r.GuID == GuID);
-            }
-            else
-            {
-                results = db.Results.Include(r => r.Exercise).Include(r => r.ExerciseDayProgram).Where(r => r.GuID == GuID).Where(r => r.ExerciseDayProgram.ExerciseDayName == exerciseDaySearchName);
+                int exID = (from exName in db.Exercises
+                           where exName.ExerciseName == exerciseName
+                           select exName.ID).First();
+
+                results = results.Where(r => r.ExerciseID == exID);
             }
 
+
+            //If there is a filter for the exercise day program, filter the results
+            if (!String.IsNullOrEmpty(exerciseDaySearchName))
+            {
+                int exD = (from exDay in db.ExerciseDayPrograms
+                           where exDay.ExerciseDayName == exerciseDaySearchName
+                           select exDay.ID).First();
+
+                results = results.Where(r => r.ExerciseDayProgramID == exD);
+            }
          
             
             return View(results.ToList());
