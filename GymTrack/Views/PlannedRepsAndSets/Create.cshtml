@@ -1,10 +1,11 @@
 ﻿@model GymTrack.Models.PlannedRepsAndSets
 
+
 @{
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Add Exercises to a program</h2>
 
 
 @using (Html.BeginForm())
@@ -12,23 +13,24 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>PlannedRepsAndSets</h4>
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ExerciseDayProgramID, "ExerciseDayProgramID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ExerciseDayProgramID, "Program Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ExerciseDayProgramID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("ExerciseDayProgramID", null, htmlAttributes: new { @class = "form-control", @id = "programID", @onchange = "getExerciseID()" })
                 @Html.ValidationMessageFor(model => model.ExerciseDayProgramID, "", new { @class = "text-danger" })
+                @Html.ActionLink("Show exercises", "Create", new { id = 4 })  // This is hard coded to 4, how can we get 
             </div>
         </div>
 
         <br />
 
-        <h4>Select Exercises, sets and reps</h4>
+        <h4>Select exercises, sets and reps</h4>
         <div class="form-group">
-            @Html.LabelFor(model => model.ExerciseID, "ExerciseID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ExerciseID, "Exercise Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("ExerciseID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ExerciseID, "", new { @class = "text-danger" })
@@ -60,6 +62,27 @@
     </div>
 }
 
+
+<h3>Exercises for the routine selected above</h3>
+<table class="table">
+    <tr>
+        <th>Exercise</th>
+        <th>Planned Reps</th>
+        <th>Planned Sets</th>
+    </tr>
+
+    @foreach (var item in ViewBag.Exercises)
+    {
+        <tr>
+            <td>@item.Exercise.ExerciseName</td>
+            <td>@item.PlannedSets</td>
+            <td>@item.PlannedReps</td>
+        </tr>
+    }
+
+</table>
+
+
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
@@ -67,3 +90,11 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script type="text/javascript">
+    function getExerciseID(){
+        if($("#programID").val()!=""){
+            $.get("/PlannedRepsAndSets/Create",
+               {id: $("#programID").val()}
+            )}};
+</script>

@@ -28,9 +28,8 @@ namespace GymTrack.Controllers
             var exerciseDays = new List<string>();
 
             var edQuery = from ed in db.ExerciseDayPrograms
-                          orderby ed.ExerciseDayName
-                          select ed.ExerciseDayName;
-            
+                          select ed.ExerciseDayName;    
+        
             exerciseDays.AddRange(edQuery.Distinct());
            
             ViewBag.exerciseDaySearchName = new SelectList(exerciseDays);
@@ -84,8 +83,9 @@ namespace GymTrack.Controllers
 
                 results = results.Where(r => r.ExerciseDayProgramID == exD);
             }
-         
-            
+
+            results = results.OrderByDescending(r => r.ExerciseDate);
+
             return View(results.ToList());
         }
 
@@ -109,6 +109,14 @@ namespace GymTrack.Controllers
         {
             ViewBag.ExerciseID = new SelectList(db.Exercises, "ID", "ExerciseName");
             ViewBag.ExerciseDayProgramID = new SelectList(db.ExerciseDayPrograms, "ID", "ExerciseDayName");
+            ViewBag.ExerciseDate = DateTime.Now;                       
+
+            //This code creates a drop down list for the sets
+            var sets = new List<SelectListItem>();
+                for (var i = 1; i < 16; i++)
+                    sets.Add(new SelectListItem { Text = i.ToString(), Value =    i.ToString() });
+            ViewBag.Sets = sets;
+
             return View();
         }
 

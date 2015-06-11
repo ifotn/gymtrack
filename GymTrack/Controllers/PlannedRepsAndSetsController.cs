@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using GymTrack.DAL;
 using GymTrack.Models;
@@ -41,8 +37,14 @@ namespace GymTrack.Controllers
         // GET: PlannedRepsAndSets/Create
         public ActionResult Create(int? id)
         {
+            var exercisesInProgram = from ex in db.PlannedRepsAndSets
+                                     select ex;
+
+            exercisesInProgram = exercisesInProgram.Where(e => e.ExerciseDayProgramID == id);
+
             ViewBag.ExerciseDayProgramID = new SelectList(db.ExerciseDayPrograms, "ID", "ExerciseDayName", id);
-            ViewBag.ExerciseID = new SelectList(db.Exercises, "ID", "ExerciseName",1);            
+            ViewBag.ExerciseID = new SelectList(db.Exercises.OrderBy(o => o.ExerciseName), "ID", "ExerciseName",1);
+            ViewBag.Exercises = exercisesInProgram;
             return View();
         }
 

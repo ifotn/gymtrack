@@ -7,9 +7,6 @@
 <h2>Create</h2>
 
 
-<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript">    </script>
-<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -37,7 +34,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ExerciseDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ExerciseDate, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.ExerciseDate, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.TextBoxFor(model => model.ExerciseDate, new { @Value = ViewBag.ExerciseDate })
                 @Html.ValidationMessageFor(model => model.ExerciseDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -45,8 +43,18 @@
         <div class="form-group">
             @Html.LabelFor(model => model.SetNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SetNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("SetNumber", new SelectList(ViewBag.Sets, "Text", "Value"))
                 @Html.ValidationMessageFor(model => model.SetNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Reps, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.Reps, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownList("Reps", new SelectList(ViewBag.Sets, "Text", "Value"))
+                @Html.ValidationMessageFor(model => model.Reps, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -55,14 +63,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Reps, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Reps, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Reps, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -82,8 +82,3 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#exercise_date").datepicker({ dateFormat: 'dd/mm/yy' });
-    });
-</script>
