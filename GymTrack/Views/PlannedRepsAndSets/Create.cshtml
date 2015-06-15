@@ -22,7 +22,7 @@
             <div class="col-md-10">
                 @Html.DropDownList("ExerciseDayProgramID", null, htmlAttributes: new { @class = "form-control", @id = "programID", @onchange = "getExerciseID()" })
                 @Html.ValidationMessageFor(model => model.ExerciseDayProgramID, "", new { @class = "text-danger" })
-                @Html.ActionLink("Show exercises", "Create", new { id = 4 })  // This is hard coded to 4, how can we get 
+                @Html.ActionLink("Show exercises", "Create", new { id = 4 })   @*This is hard coded to 4, how can we get*@ 
             </div>
         </div>
 
@@ -89,12 +89,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles//getExercises")
 }
-
-<script type="text/javascript">
-    function getExerciseID(){
-        if($("#programID").val()!=""){
-            $.get("/PlannedRepsAndSets/Create",
-               {id: $("#programID").val()}
-            )}};
-</script>
